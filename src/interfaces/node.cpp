@@ -56,6 +56,7 @@ namespace {
 class NodeImpl : public Node
 {
 public:
+<<<<<<< HEAD
     NodeImpl(NodeContext* context) { setContext(context); }
     void initError(const bilingual_str& message) override { InitError(message); }
     bool parseParameters(int argc, const char* const argv[], std::string& error) override
@@ -68,6 +69,20 @@ public:
     bool softSetBoolArg(const std::string& arg, bool value) override { return gArgs.SoftSetBoolArg(arg, value); }
     void selectParams(const std::string& network) override { SelectParams(network); }
     bool initSettings(std::string& error) override { return gArgs.InitSettings(error); }
+||||||| merged common ancestors
+    void initError(const bilingual_str& message) override { InitError(message); }
+    bool parseParameters(int argc, const char* const argv[], std::string& error) override
+    {
+        return gArgs.ParseParameters(argc, argv, error);
+    }
+    bool readConfigFiles(std::string& error) override { return gArgs.ReadConfigFiles(error, true); }
+    void forceSetArg(const std::string& arg, const std::string& value) override { gArgs.ForceSetArg(arg, value); }
+    bool softSetArg(const std::string& arg, const std::string& value) override { return gArgs.SoftSetArg(arg, value); }
+    bool softSetBoolArg(const std::string& arg, bool value) override { return gArgs.SoftSetBoolArg(arg, value); }
+    void selectParams(const std::string& network) override { SelectParams(network); }
+    bool initSettings(std::string& error) override { return gArgs.InitSettings(error); }
+=======
+>>>>>>> gui: Partially revert #10244 gArgs and Params changes
     uint64_t getAssumedBlockchainSize() override { return Params().AssumedBlockchainSize(); }
     uint64_t getAssumedChainStateSize() override { return Params().AssumedChainStateSize(); }
     std::string getNetwork() override { return Params().NetworkIDString(); }
@@ -109,7 +124,12 @@ public:
             StopMapPort();
         }
     }
+<<<<<<< HEAD
     void setupServerArgs() override { return SetupServerArgs(*m_context); }
+||||||| merged common ancestors
+    void setupServerArgs() override { return SetupServerArgs(m_context); }
+=======
+>>>>>>> gui: Partially revert #10244 gArgs and Params changes
     bool getProxy(Network net, proxyType& proxy_info) override { return GetProxy(net, proxy_info); }
     size_t getNodeCount(CConnman::NumConnections flags) override
     {
